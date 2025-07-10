@@ -5,5 +5,5 @@ PyPDF2
 faiss-cpu
 requests
 python-dotenv
-torch==2.0.1+cpu -f https://download.pytorch.org/whl/torch_stable.html
 sentence-transformers==2.2.2
+torch==2.0.1
