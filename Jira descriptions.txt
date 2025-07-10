@@ -1,0 +1,24 @@
+1. Title: Validate Block Pricing Logic for Annual Subscription SKU CCP001
+Description:
+As a Sales user, I want the quantity input for SKU CCP001 to automatically adjust to the appropriate block tier (e.g., entering 50,000 updates to 60,000) so that correct unit pricing is applied based on the rate card.
+
+2. Title: Ensure Correct Approval Routing for Discount Thresholds
+Description:
+As a sales manager, I want the approval workflow to trigger appropriate approval levels (AE, GVP, Sales VP, etc.) when discounts are applied to CCP001 and CCP004 SKUs, so that discounts follow the business compliance rules from the rate card.
+
+3. Title: Auto-Add CCP005 When Annual or Monthly SKU is Added
+Description:
+As a quoting user, I want the system to automatically add CCP005 whenever CCP001 (Annual) or CCP004 (Monthly) is included in the quote, so that required dependencies are enforced during quote configuration.
+
+4. Title: Validate Editable and Non-Editable Fields in Quote Line Items
+Description:
+As a QA engineer, I want to verify that only the discount field is editable in the quote line item and fields like unit price and quantity are auto-calculated based on rate card logic, to ensure data integrity in the quoting process.
+
+5. Title: Verify Monthly SKU CCP004 Pricing and Discount Behavior
+Description:
+As a Sales Operations user, I want to validate that SKU CCP004 applies monthly pricing correctly and adheres to the same block logic and approval rules as CCP001, ensuring consistency between monthly and annual SKUs.
+
+6. Title: Confirm Auto Population of Unit Price from Rate Card
+Description:
+As a sales user, I want to ensure that upon selecting SKUs like CCP001 or CCP004, the unit price field is auto-populated based on the country-specific rate card data, to prevent manual entry errors and enforce pricing standards.
+
