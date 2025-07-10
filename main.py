@@ -29,7 +29,7 @@ except ImportError:
 load_dotenv()
 
 # Constants
-EMBEDDING_MODEL = SentenceTransformer("all-MiniLM-L6-v2")
+EMBEDDING_MODEL = SentenceTransformer("paraphrase-MiniLM-L3-v2")
 DATA_DIR = "data"
 INDEX_DIR = os.path.join(DATA_DIR, "faiss_index")
 TEXT_DIR = os.path.join(DATA_DIR, "texts")
