@@ -9,4 +9,4 @@ python-dotenv
 torch==2.5.0
 python-multipart
 huggingface_hub==0.10.1
-tokenizers>=0.15.2
+tokenizers==0.13.3
