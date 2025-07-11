@@ -10,4 +10,4 @@ torch==2.5.0
 python-multipart
 sentence-transformers==2.2.2
 huggingface_hub==0.10.1
-tokenizers==0.13.3
+tokenizers==0.13.2
