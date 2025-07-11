@@ -20,16 +20,13 @@ try:
 except ImportError:
     raise ImportError("Install FAISS using: pip install faiss-cpu")
 
-try:
-    from sentence_transformers import SentenceTransformer
-except ImportError:
-    raise ImportError("Install 'sentence-transformers' using: pip install sentence-transformers")
-
+                                 
 # Load environment
 load_dotenv()
 
 # Constants
-EMBEDDING_MODEL = SentenceTransformer("paraphrase-MiniLM-L3-v2")
+# EMBEDDING_MODEL = SentenceTransformer("sentence-transformers/paraphrase-MiniLM-L3-v2")
+# EMBEDDING_MODEL = SentenceTransformer("paraphrase-MiniLM-L3-v2")
 DATA_DIR = "data"
 INDEX_DIR = os.path.join(DATA_DIR, "faiss_index")
 TEXT_DIR = os.path.join(DATA_DIR, "texts")
@@ -38,7 +35,13 @@ os.makedirs(TEXT_DIR, exist_ok=True)
 
 # FastAPI app
 app = FastAPI()
+EMBEDDING_MODEL = None
 
+@app.on_event("startup")
+def load_model():
+    global EMBEDDING_MODEL
+    from sentence_transformers import SentenceTransformer
+    EMBEDDING_MODEL = SentenceTransformer("sentence-transformers/paraphrase-MiniLM-L3-v2")
 # Jira + Together config
 TOGETHER_API_KEY = os.getenv("TOGETHER_API_KEY")
 JIRA_BASE_URL = os.getenv("JIRA_BASE_URL")
@@ -79,6 +82,9 @@ def chunk_text(text, size=500, overlap=50):
     return chunks
 
 def save_index(project: str, texts: List[str]):
+    if EMBEDDING_MODEL is None:
+        raise RuntimeError("Embedding model is not loaded yet. Please check if the app startup event ran properly.")
+
     vecs = EMBEDDING_MODEL.encode(texts)
     index = faiss.IndexFlatL2(vecs.shape[1])
     index.add(np.array(vecs))
@@ -97,6 +103,9 @@ def load_index(project: str):
     return index, texts
 
 def search_chunks(index, texts, query, k=5):
+    if EMBEDDING_MODEL is None:
+        raise RuntimeError("Embedding model is not loaded yet. Please check if the app startup event ran properly.")
+
     vec = EMBEDDING_MODEL.encode([query])
     _, I = index.search(np.array(vec), k)
     return [texts[i] for i in I[0]]
